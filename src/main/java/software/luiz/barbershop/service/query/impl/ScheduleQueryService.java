@@ -1,7 +1,5 @@
 package software.luiz.barbershop.service.query.impl;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import software.luiz.barbershop.entity.ScheduleEntity;
 import software.luiz.barbershop.exception.NotFoundException;
@@ -13,10 +11,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 @Repository
-@AllArgsConstructor
 public class ScheduleQueryService implements IScheduleQueryService {
 
-    @Autowired
     private final IScheduleRepository repository;
 
     @Override
@@ -35,5 +31,9 @@ public class ScheduleQueryService implements IScheduleQueryService {
             var message = "Já existe um cliente agendado no horário solicitado";
             throw new ScheduleInUseException(message);
         }
+    }
+
+    public ScheduleQueryService(IScheduleRepository repository) {
+        this.repository = repository;
     }
 }

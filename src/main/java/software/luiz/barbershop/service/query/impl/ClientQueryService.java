@@ -14,10 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@AllArgsConstructor
 public class ClientQueryService implements IClientQueryService {
 
-    @Autowired
     private final IClientRepository repository;
 
     @Override
@@ -62,5 +60,9 @@ public class ClientQueryService implements IClientQueryService {
             var message = "O e-mail" + email + "já esta em uso";
             throw  new EmailInUseException(message);
         }
+    }
+
+    public ClientQueryService(IClientRepository repository) {
+        this.repository = repository;
     }
 }

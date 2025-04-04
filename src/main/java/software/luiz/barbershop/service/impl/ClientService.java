@@ -9,7 +9,6 @@ import software.luiz.barbershop.service.IClientService;
 import software.luiz.barbershop.service.query.IClientQueryService;
 
 @Repository
-@AllArgsConstructor
 public class ClientService implements IClientService {
 
     private final IClientRepository repository;
@@ -39,5 +38,10 @@ public class ClientService implements IClientService {
     public void delete(long id) {
         queryService.findById(id);
         repository.deleteById(id);
+    }
+
+    public ClientService(IClientRepository repository, IClientQueryService queryService) {
+        this.repository = repository;
+        this.queryService = queryService;
     }
 }

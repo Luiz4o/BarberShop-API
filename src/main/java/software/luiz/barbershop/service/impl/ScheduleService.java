@@ -8,7 +8,6 @@ import software.luiz.barbershop.service.IScheduleService;
 import software.luiz.barbershop.service.query.IScheduleQueryService;
 
 @Service
-@AllArgsConstructor
 public class ScheduleService implements IScheduleService {
 
     private final IScheduleRepository repository;
@@ -26,5 +25,10 @@ public class ScheduleService implements IScheduleService {
         queryService.findById(id);
         repository.deleteById(id);
 
+    }
+
+    public ScheduleService(IScheduleRepository repository, IScheduleQueryService queryService) {
+        this.repository = repository;
+        this.queryService = queryService;
     }
 }

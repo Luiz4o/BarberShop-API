@@ -17,10 +17,9 @@ import java.util.Set;
                 @UniqueConstraint(name = "UK_PHONE",columnNames = "phone")
         }
 )
-@Getter
-@Setter
-@ToString
+
 public class ClientEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,6 @@ public class ClientEntity {
     @Column(nullable = false, length = 11, columnDefinition = "CHAR(11)")
     private String phone;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScheduleEntity> schedules = new HashSet<>();
 
@@ -49,5 +47,55 @@ public class ClientEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getEmail(), getPhone());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Set<ScheduleEntity> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(Set<ScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

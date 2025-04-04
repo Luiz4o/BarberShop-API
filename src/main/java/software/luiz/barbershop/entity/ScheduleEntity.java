@@ -15,9 +15,7 @@ import java.util.Objects;
                 @UniqueConstraint(name = "UK_SCHEDULE_INTERVAL", columnNames = {"start_at", "end_at"}),
         }
 )
-@Getter
-@Setter
-@ToString
+
 public class ScheduleEntity {
 
     @Id
@@ -30,7 +28,6 @@ public class ScheduleEntity {
     @Column(nullable = false, name= "end_at")
     private OffsetDateTime endAt;
 
-    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientEntity client = new ClientEntity();
@@ -44,5 +41,46 @@ public class ScheduleEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getStartAt(), getEndAt());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public OffsetDateTime getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(OffsetDateTime startAt) {
+        this.startAt = startAt;
+    }
+
+    public OffsetDateTime getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(OffsetDateTime endAt) {
+        this.endAt = endAt;
+    }
+
+    public ClientEntity getClient() {
+        return client;
+    }
+
+    public void setClient(ClientEntity client) {
+        this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleEntity{" +
+                "id=" + id +
+                ", startAt=" + startAt +
+                ", endAt=" + endAt +
+                '}';
     }
 }
